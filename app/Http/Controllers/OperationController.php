@@ -110,7 +110,7 @@ class OperationController extends Controller
         ]);
         Operation::whereId($id)->update($updateOperation);
 
-        return redirect()->route('operation.index')
+        return redirect()->route('operations.index')
                          ->with('success', 'L\operation est mise à jour avec succes');
     }
 

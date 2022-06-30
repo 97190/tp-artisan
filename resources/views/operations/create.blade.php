@@ -50,10 +50,10 @@
                                 <label class="label">Débit ?</label>
                                     <select name="debit">
                                 <option value="0">Crédit</option>
-                                <option value="1"></option>
+                                <option value="1">Débit</option>
                                         </select>
                                     </div>
-                                <button type="submit" class="btn btn-primary rounded-pill m-2">Créer un status</button>
+                                <button type="submit" class="btn btn-primary rounded-pill m-2">Créer une opération</button>
                             </form>
                             <!-- Fin du formulaire -->
                         </div>
