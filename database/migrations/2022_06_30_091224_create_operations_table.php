@@ -27,6 +27,7 @@ return new class extends Migration
             $table->foreign('status_id')
                 ->references('id')
                 ->on('statuses');
+            $table->decimal('amount', 5, 2);
         });
     }
 

@@ -54,6 +54,11 @@
                                 <option value="1">Débit</option>
                                         </select>
                                     </div>
+
+                                    <div class="form-group">
+                                    <label>Montant</label>
+                                    <input value='{{ $operation->amount }}'type="number" name="amount" step=".01" class="form-control">
+                                </div>
                                 <button type="submit" class="btn btn-primary rounded-pill m-2">Modifier une opération</button>
                             </form>
                             <!-- Fin du formulaire -->

@@ -8,8 +8,8 @@ use Illuminate\Database\Eloquent\Model;
 class Operation extends Model
 {
     use HasFactory;
-    protected $fillable = ['nature_operation', 'date_operation', 'debit', 'category_id', 'status_id'];
-    
+    protected $fillable = ['nature_operation', 'date_operation', 'debit', 'category_id', 'status_id', 'amount'];
+
     public function category()
     {
         return $this->belongsTo(Category::class);

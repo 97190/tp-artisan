@@ -25,6 +25,7 @@
                                     <th scope="col">Débit</th>
                                     <th scope="col">Catégorie</th>
                                     <th scope="col">Statut</th>
+                                    <th scope="col">Montant</th>
                                     <th scope="col">Action</th>
                                 </tr>
                                 </thead>
@@ -34,18 +35,30 @@
                                         <td>{{$operation->id}}</td>
                                         <td>{{$operation->nature_operation}}</td>
                                         <td>{{$operation->date_operation}}</td>
+
                             
                                         <td>
                                             @if ( $operation->debit == 0) <p class="text-success">Crédit </p>@else<p class="text-danger"> Débit</p> <!--Changemnt de statut avec la classe boostrap si crédit est vrai -->
                                             @endif
                                         </td>
+                                        @if ($operation->category)
+                                        <td>{{$operation->category->category_name }}</td>
+                                        @else
+                                        <td>Pas de catégorie</td>
+                                        @endif 
+                                        @if ($operation->status)
+                                        <td>{{$operation->status->status_name }}</td>
+                                        @else
+                                        <td>Pas de statut</td>
+                                        @endif 
+                                        <td>{{ $operation->amount }} €</td>
                                         <td>
                                             <a href="{{ route('operations.edit', $operation->id) }}" class="btn btn-primary btn-sm">Editer</a>
 
                                             <form action="{{ route('operations.destroy',$operation->id) }}" method="post">
                                                 @csrf
                                                 @method('DELETE')
-                                                <button class="btn btn-danger btn-sm" type="submit"  onclick="return confirm('Voulez vous vraiment supprimer le status?')">Supprimer</button>
+                                                <button class="btn btn-danger btn-sm" type="submit"  onclick="return confirm('Voulez vous vraiment supprimer l\opération?')">Supprimer</button>
                                             </form>
                                         </td>
                                     </tr>
@@ -53,7 +66,7 @@
                                 </tbody>
                             </table>
                             <!-- Fin du Tableau -->
-                            <a href="{{ route('operations.index') }}" class="btn btn-warning">Voir les opérations</a>
+                            <a href="{{ route('statuses.index') }}" class="btn btn-warning">Voir les statuts</a>
                             <a href="{{ route('categories.index') }}" class="btn btn-secondary">Voir les categories</a>
                         </div>
                     </div>

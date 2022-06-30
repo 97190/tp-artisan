@@ -45,6 +45,7 @@ class OperationController extends Controller
             'debit'=>'required',
             'category_id'=>'required',
             'status_id'=>'required',
+            'amount'=> 'required'
         
         ]);
 
@@ -54,7 +55,7 @@ class OperationController extends Controller
             'debit' => $request->debit,
             'category_id' => $request->category_id,
             'status_id' => $request->status_id,
-    
+            'amount'=> $request->amount
         ]);
 
 
@@ -107,11 +108,12 @@ class OperationController extends Controller
             'debit'=>'required',
             'category_id'=>'required',
             'status_id'=>'required',
+            'amount'=> 'required'
         ]);
         Operation::whereId($id)->update($updateOperation);
 
         return redirect()->route('operations.index')
-                         ->with('success', 'L\operation est mise à jour avec succes');
+                         ->with('success', "L'operation est mise à jour avec succes");
     }
 
     /**
