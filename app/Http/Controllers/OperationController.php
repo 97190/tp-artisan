@@ -6,6 +6,7 @@ use Illuminate\Http\Request;
 use App\Models\Operation;
 use App\Models\Status;
 use App\Models\Category;
+use Illuminate\Support\Facades\DB;
 
 class OperationController extends Controller
 {
@@ -17,7 +18,18 @@ class OperationController extends Controller
     public function index()
     {
         $operations = Operation::all(); // Toutes les opérations sont récuperées dans la variable $operations
-        return view('operations.index', compact('operations')); // On retourne la vue avec le listing des opérations avec le template index.blade.php et compact sert à afficher les opérations dans la vue avec les variables blade
+        $totalDebit  = DB::table('operations') //je creer une variable pour pouvoir faire une requete sql sur la table opération
+            ->where('operations.debit', '=', 1) // qui a comme valeur debit = 1
+            ->sum('operations.amount'); // je calcule le total des operation débit
+        $totalCredit  = DB::table('operations')
+            ->where('operations.debit', '=', 0)
+            ->sum('operations.amount');//je fais pareil pour les opérations crédit
+        $total = $totalCredit - $totalDebit; // je calcule le total des opérations
+        $nbrOperations = DB::table('operations')
+            ->count('operations.id'); // je fais le compte du nombre d'opérations dans la table
+
+        return view('operations.index',
+            compact('operations' , 'totalCredit' , 'totalDebit' , 'total' , 'nbrOperations')); // On retourne la vue avec le listing des opérations avec le template index.blade.php et compact sert à afficher les opérations dans la vue avec les variables blade
     }
 
     /**
@@ -46,7 +58,7 @@ class OperationController extends Controller
             'category_id'=>'required',
             'status_id'=>'required',
             'amount'=> 'required'
-        
+
         ]);
 
         $operation = Operation::create([ // Assigne les valeurs saisies dans le formulaire au champs correspondant dans la bd (création de la nouvelle opération)
@@ -61,7 +73,7 @@ class OperationController extends Controller
 
 
         return redirect()->route('operations.index')
-            ->with('success', 'Opération créer avec succès !'); // Une redirection vers la route index avec un succès 
+            ->with('success', 'Opération créer avec succès !'); // Une redirection vers la route index avec un succès
     }
 
     /**
@@ -88,7 +100,7 @@ class OperationController extends Controller
     {
         $operation = Operation::findOrFail($id);
         $categories = Category::all();
-        $statuses = Status::all(); 
+        $statuses = Status::all();
         return view('operations.edit', compact('operation' , 'categories' , 'statuses'));
 
     }
