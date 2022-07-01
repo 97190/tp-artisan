@@ -9,6 +9,24 @@
 
 </head>
 <body>
+<header>
+    <nav class="navbar navbar-light bg-light">
+        <div class="container-fluid">
+                <a class="navbar-brand" href="/">
+                    <img src="{{ asset('images/logo.png') }}" alt="logo" width="40" height="30" class="d-inline-block align-text-top ">
+                    Artisant
+                </a>
+                <ul class="navbar-nav me-auto ">
+                    <li class="nav-item ml-3">
+                        <a class="nav-link"  href="/dashboard">Dashboard</a>
+                    </li>
+                    <li class="nav-item ml-3">
+                        <a class="nav-link"  href="/contact-us">Contactez-nous</a>
+                    </li>
+                </ul>
+            </div>
+    </nav>
+</header>
 <div class="container">
     @yield('content')
 </div>

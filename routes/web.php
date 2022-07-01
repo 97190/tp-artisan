@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\ContactController;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\StatusController;
 use App\Http\Controllers\CategoryController;
@@ -27,4 +28,8 @@ Route::get('/dashboard', function () {
 Route::resource('operations', OperationController::class)->middleware(['auth']);
 Route::resource('categories', CategoryController::class)->middleware(['auth']);
 Route::resource('statuses', StatusController::class)->middleware(['auth']);
+
+Route::get('/contact-us', [ContactController::class, 'createForm']);
+Route::post('/contact-us', [ContactController::class, 'ContactForm'])->name('contact.store');
+
 require __DIR__.'/auth.php';
