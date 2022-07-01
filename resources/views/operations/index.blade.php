@@ -15,6 +15,19 @@
                                 </div><br />
                             @endif
                             <a href="{{ route('operations.create') }}" class="btn btn-success btn-sm">Ajouter une opération</a>
+                            <div style= "display:inline-block; float:right;" >
+                            <div style="display:inline-block;">
+                            <p> Situation du compte :</p>
+                            </div>
+                            <div style="display:inline-block;vertical-align:top;">
+                            
+                            @if($total > 0)
+                            <img src="{{asset('images/soleil.png')}}" alt="positif" width="50px" height="50px">
+                            @else
+                            <img src="{{asset('images/nuage.png')}}" alt="negatif" width="50px" height="50px">
+                            @endif
+                            </div>
+                            </div>
                             <!-- Tableau -->
                           <p class="text-center h6 bg-light"> Il y a {{ $nbrOperations }} opérations</p><!-- j'affiche le nombre total d'opérations-->
                             <table class="table">
