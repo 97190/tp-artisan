@@ -74,8 +74,10 @@ class OperationController extends Controller
         ]);
 
 
-        Mail::to('melissa.mangione@gmail.com')
-            ->send(new MailOperation($operation));
+        Mail::to('melissa.mangione@gmail.com') //permet définir de qui est envoyé le mail
+            ->send(new MailOperation($operation));// création d'un nouveau MailOperation
+        //envoie le mail avec les données rempli dans le formulaire
+
         return redirect()->route('operations.index')
             ->with('success', 'Opération créer avec succès !'); // Une redirection vers la route index avec un succès
     }
@@ -102,10 +104,10 @@ class OperationController extends Controller
      */
     public function edit($id)
     {
-        $operation = Operation::findOrFail($id); // Dans la variable opération on récupère les ID 
+        $operation = Operation::findOrFail($id); // Dans la variable opération on récupère les ID
         $categories = Category::all(); // On récupère  toute les catégories
         $statuses = Status::all(); // On récupère  tout les statuts
-        return view('operations.edit', compact('operation' , 'categories' , 'statuses')); // On retourne la vue édite du dossier opération 
+        return view('operations.edit', compact('operation' , 'categories' , 'statuses')); // On retourne la vue édite du dossier opération
 
     }
 
@@ -118,7 +120,7 @@ class OperationController extends Controller
      */
     public function update(Request $request, $id)
     {
-        $updateOperation = $request->validate([ // Récupération des valeurs saisies dans le formulaire et vérification des données requises 
+        $updateOperation = $request->validate([ // Récupération des valeurs saisies dans le formulaire et vérification des données requises
             'nature_operation'=>'required',
             'date_operation'=>'required',
             'debit'=>'required',
@@ -140,8 +142,8 @@ class OperationController extends Controller
      */
     public function destroy($id) // Cela permet de supprimer une opération par rapport à un ID
     {
-        $operation = Operation::findOrFail($id); //  On récupère l'opération par rapport à son ID 
-        $operation->delete(); // Supression de l'opération 
+        $operation = Operation::findOrFail($id); //  On récupère l'opération par rapport à son ID
+        $operation->delete(); // Supression de l'opération
         return redirect('/operations')->with('success', 'Operation supprimée');
     }
 }
