@@ -9,7 +9,8 @@
             {{ session()->get('success') }}
         </div><br />
     @endif
-    <form  method="post" action="{{ route('contact.store') }}">
+    <p>Vous rencontrez un problème sur l'application ou vous avez une question , contactez nous grâce à ce formulaire </p>
+    <form  method="post" action="{{ route('contact.store') }}" class="center">
         @csrf
         <div class="form-group">
             <label>Votre nom</label>

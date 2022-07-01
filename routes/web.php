@@ -32,4 +32,6 @@ Route::resource('statuses', StatusController::class)->middleware(['auth']);
 Route::get('/contact-us', [ContactController::class, 'createForm']);
 Route::post('/contact-us', [ContactController::class, 'ContactForm'])->name('contact.store');
 
+
+
 require __DIR__.'/auth.php';

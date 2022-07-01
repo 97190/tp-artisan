@@ -10,21 +10,46 @@
 </head>
 <body>
 <header>
-    <nav class="navbar navbar-light bg-light">
+
+    <nav class="navbar navbar-expand-lg navbar-light bg-light">
         <div class="container-fluid">
-                <a class="navbar-brand" href="/">
-                    <img src="{{ asset('images/logo.png') }}" alt="logo" width="40" height="30" class="d-inline-block align-text-top ">
-                    Artisant
-                </a>
-                <ul class="navbar-nav me-auto ">
-                    <li class="nav-item ml-3">
-                        <a class="nav-link"  href="/dashboard">Dashboard</a>
+            <a class="navbar-brand" href="/">
+                <img src="{{ asset('images/logo.png') }}" alt="logo" width="40" height="30" class="d-inline-block align-text-top ">
+                Artisant
+            </a>
+            <div class="collapse navbar-collapse" id="navbarNav">
+                <ul class="navbar-nav">
+                    <li class="nav-item">
+                        <a class="nav-link active" aria-current="page" href="{{ url('/dashboard') }}">Dashboard</a>
                     </li>
-                    <li class="nav-item ml-3">
-                        <a class="nav-link"  href="/contact-us">Contactez-nous</a>
+                    <li class="nav-item">
+                        <a class="nav-link active" href="{{ url('/contact-us') }}">Contactez-nous</a>
+                    </li>
+                    <li class="nav-item">
+                        @if (Route::has('login'))
+                            @auth
+                                <a href="{{ url('/dashboard') }}" class="nav-link">Mon compte</a>
+                            @endauth
+                        @endif
                     </li>
                 </ul>
             </div>
+            @if (Route::has('login'))
+                @auth
+                    <form action="{{ route('logout') }}" method="POST">
+                        @csrf
+                        <button type="submit" class="btn btn-secondary">
+                            {{ __('Se déconnecter') }}
+                        </button>
+                    </form>
+                @else
+                    <a href="{{ route('login') }}" class="nav-link text-dark">Se connecter</a>
+                    @if (Route::has('register'))
+                        <a href="{{ route('register') }}" class="nav-link text-dark">S'enregistrer</a>
+                    @endif
+                @endauth
+            @endif
+        </div>
     </nav>
 </header>
 <div class="container">
