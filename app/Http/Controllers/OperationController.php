@@ -7,6 +7,9 @@ use App\Models\Operation;
 use App\Models\Status;
 use App\Models\Category;
 use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Facades\Mail;
+use App\Mail\Operation as MailOperation;
+
 
 class OperationController extends Controller
 {
@@ -71,7 +74,8 @@ class OperationController extends Controller
         ]);
 
 
-
+        Mail::to('melissa.mangione@gmail.com')
+            ->send(new MailOperation($operation));
         return redirect()->route('operations.index')
             ->with('success', 'Opération créer avec succès !'); // Une redirection vers la route index avec un succès
     }
