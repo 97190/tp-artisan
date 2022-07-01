@@ -16,9 +16,9 @@ class Operation extends Mailable
      *
      * @return void
      */
-    public function __construct($operation)
+    public function __construct($operation) // C'est le constructeur qui est appelé avec une variable donnée en parametre
     {
-        $this->operation = $operation;
+        $this->operation = $operation; // le $this permet d'avoir une variable globale qui peut être appelée de partout dans ce fichier 
     }
 
     /**
@@ -26,10 +26,10 @@ class Operation extends Mailable
      *
      * @return $this
      */
-    public function build()
+    public function build() //Construction du mail 
     {
         return $this->from('melissa.mangione@gmail.com')
-            ->view('emails.operation')
+            ->view('emails.operation') // Le chemin d'abord nom du dossier puis nom du fichier
             ->with([ //ici j'assigne aux variables les données rentrées dans le formulaire pour les envoyer à la vue
                 'nature_operation' => $this->operation->nature_operation,
                 'date_operation'=> $this->operation->date_operation,
