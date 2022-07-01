@@ -98,10 +98,10 @@ class OperationController extends Controller
      */
     public function edit($id)
     {
-        $operation = Operation::findOrFail($id);
-        $categories = Category::all();
-        $statuses = Status::all();
-        return view('operations.edit', compact('operation' , 'categories' , 'statuses'));
+        $operation = Operation::findOrFail($id); // Dans la variable opération on récupère les ID 
+        $categories = Category::all(); // On récupère  toute les catégories
+        $statuses = Status::all(); // On récupère  tout les statuts
+        return view('operations.edit', compact('operation' , 'categories' , 'statuses')); // On retourne la vue édite du dossier opération 
 
     }
 
@@ -114,7 +114,7 @@ class OperationController extends Controller
      */
     public function update(Request $request, $id)
     {
-        $updateOperation = $request->validate([
+        $updateOperation = $request->validate([ // Récupération des valeurs saisies dans le formulaire et vérification des données requises 
             'nature_operation'=>'required',
             'date_operation'=>'required',
             'debit'=>'required',
@@ -122,7 +122,7 @@ class OperationController extends Controller
             'status_id'=>'required',
             'amount'=> 'required'
         ]);
-        Operation::whereId($id)->update($updateOperation);
+        Operation::whereId($id)->update($updateOperation); // Correspond à la requête SQL qui permet d'update une opération avec les données saisies dans le formulaire
 
         return redirect()->route('operations.index')
                          ->with('success', "L'operation est mise à jour avec succes");
@@ -134,10 +134,10 @@ class OperationController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function destroy($id)
+    public function destroy($id) // Cela permet de supprimer une opération par rapport à un ID
     {
-        $operation = Operation::findOrFail($id);
-        $operation->delete();
+        $operation = Operation::findOrFail($id); //  On récupère l'opération par rapport à son ID 
+        $operation->delete(); // Supression de l'opération 
         return redirect('/operations')->with('success', 'Operation supprimée');
     }
 }
